@@ -13,6 +13,7 @@
     <color name="title_text">#2196F3</color>
     <color name="link_text_color">#2196F3</color>
     <color name="info_text_color">#2196F3</color>
+    <color name="edittext_text_color">#FF000000</color>
 
     <color name="btn_bg">#2196F3</color>
     <color name="btn_text_color">#FFFFFFFF</color>

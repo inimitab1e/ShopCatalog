@@ -48,6 +48,12 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
 
+    //Security
+    implementation "androidx.security:security-crypto:1.0.0"
+
+    //logs
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+
     //Test
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
 }

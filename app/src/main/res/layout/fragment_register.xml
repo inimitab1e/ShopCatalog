@@ -39,7 +39,7 @@
             android:background="@drawable/base_edit_text_modif"
             android:paddingStart="@dimen/auth_groups_padding"
             android:hint="@string/profile_name_edittext_hint"
-            android:textColor="@color/black"
+            android:textColor="@color/edittext_text_color"
             android:textColorHint="@color/black"
             android:textSize="@dimen/auth_group_edittext_text_size" />
 
@@ -53,7 +53,7 @@
             android:inputType="textEmailAddress"
             android:paddingStart="@dimen/auth_groups_padding"
             android:hint="@string/register_email_edittext_hint"
-            android:textColor="@color/white"
+            android:textColor="@color/edittext_text_color"
             android:textSize="@dimen/auth_group_edittext_text_size" />
 
         <EditText
@@ -66,7 +66,7 @@
             android:inputType="textPassword"
             android:paddingStart="@dimen/auth_groups_padding"
             android:hint="@string/register_password_edittext_hint"
-            android:textColor="@color/white"
+            android:textColor="@color/edittext_text_color"
             android:textSize="@dimen/auth_group_edittext_text_size" />
 
         <Button
