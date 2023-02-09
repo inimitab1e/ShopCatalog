@@ -6,7 +6,9 @@ import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.shopcatalog.R
 import com.example.shopcatalog.databinding.FragmentCatalogBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CatalogFragment : Fragment(R.layout.fragment_catalog) {
 
     private val binding by viewBinding(FragmentCatalogBinding::bind)

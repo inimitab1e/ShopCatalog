@@ -5,10 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.launch.LaunchAppFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
+        android:id="@+id/ivLauncherAppLogo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/teal_200"
+        android:src="@mipmap/ic_app_fragment_launcher_foreground"/>
 
 </FrameLayout>

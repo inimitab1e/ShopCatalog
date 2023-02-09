@@ -5,4 +5,10 @@
     <string name="cart_menu_item">Cart menu item</string>
     <string name="catalog_menu_item">Catalog menu item</string>
     <string name="profile_menu_item">Profile menu item</string>
+    <string name="create_account_title">Создайте аккаунт</string>
+    <string name="profile_name_edittext_hint">Придумате имя профиля</string>
+    <string name="email_edittext_hint">Введите почту</string>
+    <string name="password_edittext_hint">Введите пароль</string>
+    <string name="btn_create_acc_text">Создать аккаунт</string>
+    <string name="to_login_link_text">Уже есть аккаунт?</string>
 </resources>
