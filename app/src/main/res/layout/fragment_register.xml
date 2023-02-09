@@ -24,7 +24,7 @@
     <LinearLayout
         android:id="@+id/registerGroup"
         android:layout_width="@dimen/register_group_width"
-        android:layout_height="@dimen/register_group_height"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
             android:textSize="@dimen/auth_group_edittext_text_size" />
 
         <EditText
-            android:id="@+id/etEmail"
+            android:id="@+id/etEmailRegister"
             android:layout_width="match_parent"
             android:layout_height="@dimen/auth_edit_text_height"
             android:layout_marginTop="@dimen/auth_group_margin_top"
@@ -52,12 +52,12 @@
             android:background="@drawable/base_edit_text_modif"
             android:inputType="textEmailAddress"
             android:paddingStart="@dimen/auth_groups_padding"
-            android:hint="@string/email_edittext_hint"
+            android:hint="@string/register_email_edittext_hint"
             android:textColor="@color/white"
             android:textSize="@dimen/auth_group_edittext_text_size" />
 
         <EditText
-            android:id="@+id/etPassword"
+            android:id="@+id/etPasswordRegister"
             android:layout_width="match_parent"
             android:layout_height="@dimen/auth_edit_text_height"
             android:layout_marginTop="@dimen/auth_group_margin_top"
@@ -65,7 +65,7 @@
             android:background="@drawable/base_edit_text_modif"
             android:inputType="textPassword"
             android:paddingStart="@dimen/auth_groups_padding"
-            android:hint="@string/password_edittext_hint"
+            android:hint="@string/register_password_edittext_hint"
             android:textColor="@color/white"
             android:textSize="@dimen/auth_group_edittext_text_size" />
 
@@ -79,7 +79,7 @@
             android:fontFamily="@font/inter_bold"
             android:text="@string/btn_create_acc_text"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@color/btn_text_color"
             android:textSize="@dimen/btn_text_size" />
 
     </LinearLayout>
@@ -92,7 +92,7 @@
         android:fontFamily="@font/inter"
         android:text="@string/to_login_link_text"
         android:textAlignment="center"
-        android:textColor="@color/title_text"
+        android:textColor="@color/link_text_color"
         android:textSize="@dimen/information_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

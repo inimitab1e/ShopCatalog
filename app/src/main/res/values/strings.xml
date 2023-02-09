@@ -7,8 +7,14 @@
     <string name="profile_menu_item">Profile menu item</string>
     <string name="create_account_title">Создайте аккаунт</string>
     <string name="profile_name_edittext_hint">Придумате имя профиля</string>
-    <string name="email_edittext_hint">Введите почту</string>
-    <string name="password_edittext_hint">Введите пароль</string>
+    <string name="register_email_edittext_hint">Введите почту</string>
+    <string name="register_password_edittext_hint">Введите пароль</string>
     <string name="btn_create_acc_text">Создать аккаунт</string>
     <string name="to_login_link_text">Уже есть аккаунт?</string>
+    <string name="login_title">Войти в аккаунт</string>
+    <string name="login_welcome_text">Добро пожаловать!\nЧтобы войти в аккаунт, введите\nemail и пароль</string>
+    <string name="login_email_edittext_hint">Введите почту</string>
+    <string name="login_password_edittext_hint">Введите пароль</string>
+    <string name="forget_pass_edittext_link_text">Забыл пароль</string>
+    <string name="btn_login_text">Войти</string>
 </resources>
