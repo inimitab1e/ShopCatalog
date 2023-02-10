@@ -1,4 +1,4 @@
-package com.example.student_tasks.network.utils
+package com.example.shopcatalog.domain.utils.network_utils.interceptor
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector

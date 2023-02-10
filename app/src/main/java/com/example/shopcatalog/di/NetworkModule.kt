@@ -4,11 +4,12 @@ import android.content.Context
 import com.example.shopcatalog.data.network.AuthService
 import com.example.shopcatalog.domain.security.PrefHelper
 import com.example.shopcatalog.domain.utils.StringConstants
-import com.example.shopcatalog.domain.utils.network_utils.InterceptorTypeSelector
-import com.example.student_tasks.network.utils.InterceptorType
-import com.example.student_tasks.network.utils.activeForType
-import com.example.student_tasks.network.utils.createAuthorizationInterceptor
-import com.example.student_tasks.network.utils.getChuckerInterceptor
+import com.example.shopcatalog.domain.utils.network_utils.interceptor.InterceptorTypeSelector
+import com.example.shopcatalog.domain.utils.network_utils.interceptor.InterceptorType
+import com.example.shopcatalog.domain.utils.network_utils.interceptor.activeForType
+import com.example.shopcatalog.domain.utils.network_utils.interceptor.createAuthorizationInterceptor
+import com.example.shopcatalog.domain.utils.network_utils.interceptor.getChuckerInterceptor
+import com.example.shopcatalog.domain.utils.network_utils.retrofit.ResultAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,6 +56,7 @@ object NetworkModule {
         return Retrofit.Builder()
             .baseUrl(StringConstants.baseUrl)
             .client(mOkHttpClient)
+            .addCallAdapterFactory(ResultAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
