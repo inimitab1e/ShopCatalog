@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shopcatalog.domain.model.authentication.AuthResponse
 import com.example.shopcatalog.domain.model.authentication.RefreshRequest
-import com.example.shopcatalog.domain.model.authentication.ValidityResponse
 import com.example.shopcatalog.domain.utils.network_utils.result.Result
 import com.example.shopcatalog.domain.repository.LaunchAppRepository
 import com.example.shopcatalog.domain.security.PrefHelper
@@ -21,32 +20,23 @@ class LaunchAppViewModel @Inject constructor(
     private val prefHelper: PrefHelper
 ) : ViewModel() {
 
-    private val _isUserExist = MutableStateFlow(false)
-    val isUserExist: StateFlow<Boolean> get() = _isUserExist.asStateFlow()
-
-    private val _isAccessTokenValid = MutableStateFlow(false)
-    val isAccessTokenValid: StateFlow<Boolean> get() = _isAccessTokenValid.asStateFlow()
-
-    private val _isRefreshSuccess = MutableStateFlow(false)
-    val isRefreshSuccess: StateFlow<Boolean> get() = _isRefreshSuccess.asStateFlow()
-
-    private val _errorAccessValidityResponseMessage =
+    private val _authErrorResponseMessage =
         MutableSharedFlow<String?>(1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    val errorAccessValidityResponseMessage: SharedFlow<String?> =
-        _errorAccessValidityResponseMessage.asSharedFlow()
+    val authErrorResponseMessage: SharedFlow<String?> =
+        _authErrorResponseMessage.asSharedFlow()
 
-    private val _errorRefreshResponseMessage =
+    private val _authState =
         MutableSharedFlow<String?>(1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    val errorRefreshResponseMessage: SharedFlow<String?> =
-        _errorRefreshResponseMessage.asSharedFlow()
+    val authState: SharedFlow<String?> =
+        _authState.asSharedFlow()
 
     init {
         setupInitialUserInfo()
     }
 
     private fun setupInitialUserInfo() {
-        if (prefHelper.getUserEmail() != null) {
-            _isUserExist.value = true
+        if (prefHelper.getUserEmail() == null) {
+            _authState.tryEmit(StringConstants.userNotExists)
         } else {
             handleUserTokensLogic()
         }
@@ -55,16 +45,20 @@ class LaunchAppViewModel @Inject constructor(
     private fun handleUserTokensLogic() {
         viewModelScope.launch {
             when (val isTokenValidResponse = launchAppRepository.checkAccessTokenValidity()) {
-                is Result.Success -> _isAccessTokenValid.value =
-                    isTokenValidResponse.value.message == StringConstants.tokenIsValid
-                is Result.Failure<*> ->
-                    _errorAccessValidityResponseMessage.tryEmit(isTokenValidResponse.error?.message)
+                is Result.Success -> {
+                    _authState.tryEmit(StringConstants.tokenIsValid)
+                }
+                is Result.Failure<*> -> {
+                    tryToRefreshUserTokens()
+                    _authErrorResponseMessage.tryEmit(isTokenValidResponse.error?.message)
+                }
             }
         }
     }
 
-    fun tryToRefreshUserTokens() {
+    private fun tryToRefreshUserTokens() {
         viewModelScope.launch {
+            prefHelper.deleteKey(key = StringConstants.accessTokenTitle)
             val userEmail = prefHelper.getUserEmail()
             checkNotNull(userEmail)
             val refreshResponse =
@@ -72,9 +66,9 @@ class LaunchAppViewModel @Inject constructor(
             when (refreshResponse) {
                 is Result.Success -> {
                     updateTokenValues(refreshResponse.value, userEmail)
-                    _isRefreshSuccess.value = true
+                    _authState.tryEmit(StringConstants.refreshSuccess)
                 }
-                is Result.Failure<*> -> _errorRefreshResponseMessage.tryEmit(refreshResponse.error?.message)
+                is Result.Failure<*> -> _authErrorResponseMessage.tryEmit(refreshResponse.error?.message)
             }
         }
     }

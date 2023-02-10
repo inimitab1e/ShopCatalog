@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.shopcatalog.R
 import com.example.shopcatalog.databinding.FragmentLoginBinding
+import com.example.shopcatalog.extensions.launchWhenResumed
 import com.example.shopcatalog.extensions.launchWhenStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
@@ -24,8 +25,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
 
         loginViewModel.errorLoginResponseMessage.onEach { errorMessage ->
-            Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
-        }.launchWhenStarted(lifecycleScope)
+            if (errorMessage != null) {
+                Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
+            }
+        }.launchWhenResumed(lifecycleScope)
 
         loginViewModel.isLoginSuccess.onEach { isLoginSuccess ->
             if (isLoginSuccess) {
