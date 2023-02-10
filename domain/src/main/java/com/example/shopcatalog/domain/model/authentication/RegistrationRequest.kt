@@ -2,7 +2,7 @@ package com.example.shopcatalog.domain.model.authentication
 
 import com.google.gson.annotations.SerializedName
 
-data class RegisterRequest(
+data class RegistrationRequest(
     @SerializedName("username")
     val userName: String,
     @SerializedName("email")

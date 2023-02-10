@@ -31,39 +31,34 @@ object NetworkModule {
     fun provideOkHttpClient(
         @ApplicationContext context: Context,
         prefHelper: PrefHelper
-    ): OkHttpClient {
-        return OkHttpClient
-            .Builder()
-            .addInterceptor(
-                getChuckerInterceptor(context).activeForType(
-                    InterceptorType.APPLICATION,
-                    interceptorTypeSelector
-                )
+    ): OkHttpClient = OkHttpClient
+        .Builder()
+        .addInterceptor(
+            getChuckerInterceptor(context).activeForType(
+                InterceptorType.APPLICATION,
+                interceptorTypeSelector
             )
-            .addNetworkInterceptor(
-                getChuckerInterceptor(context).activeForType(
-                    InterceptorType.NETWORK,
-                    interceptorTypeSelector
-                )
+        )
+        .addNetworkInterceptor(
+            getChuckerInterceptor(context).activeForType(
+                InterceptorType.NETWORK,
+                interceptorTypeSelector
             )
-            .addInterceptor(createAuthorizationInterceptor(prefHelper))
-            .build()
-    }
+        )
+        .addInterceptor(createAuthorizationInterceptor(prefHelper))
+        .build()
 
     @Provides
     @Singleton
-    fun provideRetrofit(mOkHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
+    fun provideRetrofit(mOkHttpClient: OkHttpClient): Retrofit =
+        Retrofit.Builder()
             .baseUrl(StringConstants.baseUrl)
             .client(mOkHttpClient)
             .addCallAdapterFactory(ResultAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    }
 
     @Provides
     @Singleton
-    fun provideAuthService(client: Retrofit): AuthService {
-        return client.create(AuthService::class.java)
-    }
+    fun provideAuthService(client: Retrofit): AuthService = client.create(AuthService::class.java)
 }

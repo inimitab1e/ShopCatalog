@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.onEach
 @AndroidEntryPoint
 class LaunchAppFragment : Fragment(R.layout.fragment_launch_app) {
 
-    private val binding by viewBinding(FragmentLaunchAppBinding::bind)
     private val launchAppViewModel: LaunchAppViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

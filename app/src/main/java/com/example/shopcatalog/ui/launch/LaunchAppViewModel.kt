@@ -58,7 +58,7 @@ class LaunchAppViewModel @Inject constructor(
                 is Result.Success -> _isAccessTokenValid.value =
                     isTokenValidResponse.value.message == StringConstants.tokenIsValid
                 is Result.Failure<*> ->
-                    _errorAccessValidityResponseMessage.tryEmit(isTokenValidResponse.error.toString())
+                    _errorAccessValidityResponseMessage.tryEmit(isTokenValidResponse.error?.message)
             }
         }
     }
@@ -74,7 +74,7 @@ class LaunchAppViewModel @Inject constructor(
                     updateTokenValues(refreshResponse.value, userEmail)
                     _isRefreshSuccess.value = true
                 }
-                is Result.Failure<*> -> _errorRefreshResponseMessage.tryEmit(refreshResponse.error.toString())
+                is Result.Failure<*> -> _errorRefreshResponseMessage.tryEmit(refreshResponse.error?.message)
             }
         }
     }
