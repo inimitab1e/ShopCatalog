@@ -1,7 +1,9 @@
 package com.example.shopcatalog.di
 
 import android.content.Context
+import androidx.room.Room
 import com.example.shopcatalog.data.AppDispatchers
+import com.example.shopcatalog.data.local.database.AppDatabase
 import com.example.shopcatalog.data.network.AuthService
 import com.example.shopcatalog.data.repository.AuthenticationRepositoryImpl
 import com.example.shopcatalog.data.repository.LaunchAppRepositoryImpl
@@ -34,6 +36,10 @@ object DataModule {
         appDispatchers: AppDispatchers
     ): AuthenticationRepository =
         AuthenticationRepositoryImpl(authService = authService, appDispatchers = appDispatchers)
+
+    @Provides
+    @Singleton
+    fun provideAppDatabaseDao(db: AppDatabase) = db.AppDatabaseDAO()
 
     @Provides
     @Singleton
