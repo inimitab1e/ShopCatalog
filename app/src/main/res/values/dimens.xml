@@ -11,4 +11,10 @@
     <dimen name="auth_group_margin_top">24dp</dimen>
     <dimen name="info_text_size">14sp</dimen>
     <dimen name="auth_btn_width">327dp</dimen>
+    <dimen name="profile_image_wigth">100dp</dimen>
+    <dimen name="profile_image_height">100dp</dimen>
+    <dimen name="profile_image_layout_margin">30dp</dimen>
+    <dimen name="user_general_info_margin_top">50dp</dimen>
+    <dimen name="btn_change_gender_margin_top">50dp</dimen>
+    <dimen name="btn_logout_margin_top">50dp</dimen>
 </resources>

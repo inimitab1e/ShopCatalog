@@ -24,6 +24,8 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initClickers()
+
         registerViewModel.errorRegistrationResponseMessage.onEach { errorMessage ->
             if (errorMessage != null) {
                 Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
@@ -35,7 +37,9 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                 findNavController().navigate(R.id.action_registerFragment_to_profileFragment)
             }
         }.launchWhenStarted(lifecycleScope)
+    }
 
+    private fun initClickers() {
         with(binding) {
             tvLoginLink.setOnClickListener {
                 findNavController().navigate(R.id.action_registerFragment_to_loginFragment)

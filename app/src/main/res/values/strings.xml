@@ -17,4 +17,8 @@
     <string name="login_password_edittext_hint">Введите пароль</string>
     <string name="forget_pass_edittext_link_text">Забыл пароль</string>
     <string name="btn_login_text">Войти</string>
+    <string name="btn_change_gender_text">Указать пол</string>
+    <string name="btn_change_phone_number_txt">Изменить номер телефона</string>
+    <string name="btn_change_avatar_text">Изменить аватар</string>
+    <string name="btn_logout_text">Выйти из аккаунта</string>
 </resources>
