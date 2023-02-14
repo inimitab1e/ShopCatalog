@@ -19,9 +19,19 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnLogout.setOnClickListener {
-            profileViewModel.doLogout()
-            findNavController().navigate(R.id.action_profileFragment_to_registerFragment)
+        initClickers()
+    }
+
+    private fun initClickers() {
+        with(binding) {
+            btnLogout.setOnClickListener {
+                profileViewModel.doLogout()
+                findNavController().navigate(R.id.action_profileFragment_to_registerFragment)
+            }
+
+            btnChangeProfileGender.setOnClickListener {
+                
+            }
         }
     }
 }

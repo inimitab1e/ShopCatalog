@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shopcatalog.domain.model.authentication.AuthResponse
 import com.example.shopcatalog.domain.repository.AuthenticationRepository
+import com.example.shopcatalog.domain.repository.UsersDatabaseLocalRepository
 import com.example.shopcatalog.domain.security.PrefHelper
 import com.example.shopcatalog.domain.utils.network_utils.result.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val authenticationRepository: AuthenticationRepository,
+    private val usersDatabaseLocalRepository: UsersDatabaseLocalRepository,
     private val prefHelper: PrefHelper
 ) : ViewModel() {
 
@@ -35,10 +37,17 @@ class RegisterViewModel @Inject constructor(
             )) {
                 is Result.Success -> {
                     insertTokenValuesInPreference(response.value, email)
+                    initUserDatabaseInfo(email, userName)
                     _isRegistrationSuccess.value = true
                 }
                 is Result.Failure<*> -> _errorRegistrationResponseMessage.tryEmit(response.error?.message)
             }
+        }
+    }
+
+    private fun initUserDatabaseInfo(email: String, userName: String) {
+        viewModelScope.launch {
+            usersDatabaseLocalRepository.insertInitialUserInfoToDatabase(email, userName)
         }
     }
 
