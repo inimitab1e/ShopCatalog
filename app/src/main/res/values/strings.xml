@@ -21,4 +21,6 @@
     <string name="btn_change_phone_number_txt">Изменить номер телефона</string>
     <string name="btn_change_avatar_text">Изменить аватар</string>
     <string name="btn_logout_text">Выйти из аккаунта</string>
+    <string name="radio_btn_male">Мужской</string>
+    <string name="radio_btn_female">Женский</string>
 </resources>

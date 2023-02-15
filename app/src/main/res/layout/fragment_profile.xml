@@ -37,7 +37,7 @@
             android:id="@+id/tvProfileGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Gender"
+            android:text="Gender"
             android:fontFamily="@font/inter"
             app:layout_constraintTop_toBottomOf="@id/tvProfileName"
             app:layout_constraintEnd_toEndOf="parent"

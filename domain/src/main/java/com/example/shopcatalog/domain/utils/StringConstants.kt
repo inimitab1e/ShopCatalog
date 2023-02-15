@@ -9,6 +9,12 @@ object StringConstants {
 
     const val prefsName = "Secret"
 
+    const val genderDialogTitle = "Ваш пол"
+    const val genderDialogSaveButton = "Сохранить"
+    const val genderDialogCloseButton = "Отменить"
+    const val genderMale = "Мужской"
+    const val genderFemale = "Женский"
+
     const val bearerHeader = "Bearer "
     const val accessTokenTitle = "AccessToken"
     const val baseUrl = "http://192.168.1.14:8080"
