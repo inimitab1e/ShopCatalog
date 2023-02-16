@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/user_general_info_margin_top"
-            tools:text="Name"
+            android:text="Name"
             android:fontFamily="@font/inter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivProfileAvatar"
@@ -47,9 +47,19 @@
             android:id="@+id/tvProfilePhoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Phone number"
+            android:text="Phone number"
             android:fontFamily="@font/inter"
             app:layout_constraintTop_toBottomOf="@id/tvProfileGender"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivProfileAvatar" />
+
+        <TextView
+            android:id="@+id/tvProfileEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:fontFamily="@font/inter"
+            app:layout_constraintTop_toBottomOf="@id/tvProfilePhoneNumber"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivProfileAvatar" />
 

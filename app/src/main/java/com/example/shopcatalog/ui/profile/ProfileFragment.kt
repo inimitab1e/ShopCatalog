@@ -5,13 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.shopcatalog.R
 import com.example.shopcatalog.databinding.FragmentProfileBinding
 import com.example.shopcatalog.domain.utils.StringConstants
+import com.example.shopcatalog.extensions.launchWhenStarted
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -27,6 +30,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         super.onViewCreated(view, savedInstanceState)
 
         initClickers()
+        currentUserInfoUiSetup()
     }
 
     private fun initClickers() {
@@ -54,6 +58,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             .setNegativeButton(StringConstants.genderDialogCloseButton) { _, _ ->
             }
             .show()
+    }
+
+    private fun currentUserInfoUiSetup() {
+        profileViewModel.currentLocalUserInfo.onEach { userInfo ->
+            with(binding) {
+                tvProfileName.text = userInfo.userName
+                tvProfileEmail.text = userInfo.email
+                tvProfileGender.text = userInfo.gender
+                tvProfilePhoneNumber.text = userInfo.phoneNumber
+                //TODO profile image
+            }
+        }.launchWhenStarted(lifecycleScope)
     }
 
     private fun updateUserGenderInfo() {

@@ -47,6 +47,9 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:2.4.3"
     implementation "androidx.room:room-ktx:2.4.3"
 
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+
     //http
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.1'
