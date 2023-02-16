@@ -6,10 +6,12 @@ import com.example.shopcatalog.data.AppDispatchers
 import com.example.shopcatalog.data.local.database.AppDatabase
 import com.example.shopcatalog.data.network.AuthService
 import com.example.shopcatalog.data.repository.AuthenticationRepositoryImpl
+import com.example.shopcatalog.data.repository.CatalogRepositoryImpl
 import com.example.shopcatalog.data.repository.LaunchAppRepositoryImpl
 import com.example.shopcatalog.data.repository.UsersDatabaseLocalRepositoryImpl
 import com.example.shopcatalog.domain.local.AppDatabaseDAO
 import com.example.shopcatalog.domain.repository.AuthenticationRepository
+import com.example.shopcatalog.domain.repository.CatalogRepository
 import com.example.shopcatalog.domain.repository.LaunchAppRepository
 import com.example.shopcatalog.domain.repository.UsersDatabaseLocalRepository
 import com.example.shopcatalog.domain.security.PrefHelper
@@ -39,6 +41,11 @@ object DataModule {
         appDispatchers: AppDispatchers
     ): AuthenticationRepository =
         AuthenticationRepositoryImpl(authService = authService, appDispatchers = appDispatchers)
+
+    @Provides
+    @Singleton
+    fun provideCatalogRepository(@ApplicationContext context: Context): CatalogRepository =
+        CatalogRepositoryImpl(context = context)
 
     @Provides
     @Singleton
