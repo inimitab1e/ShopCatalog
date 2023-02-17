@@ -1,8 +1,6 @@
 package com.example.shopcatalog.di
 
 import android.content.Context
-import androidx.room.Room
-import com.example.shopcatalog.data.AppDispatchers
 import com.example.shopcatalog.data.local.database.AppDatabase
 import com.example.shopcatalog.data.network.AuthService
 import com.example.shopcatalog.data.repository.AuthenticationRepositoryImpl
@@ -20,6 +18,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
 @Module
@@ -30,17 +29,17 @@ object DataModule {
     @Singleton
     fun provideLaunchAppRepository(
         authService: AuthService,
-        appDispatchers: AppDispatchers
+        coroutineDispatcher: CoroutineDispatcher
     ): LaunchAppRepository =
-        LaunchAppRepositoryImpl(authService = authService, appDispatchers = appDispatchers)
+        LaunchAppRepositoryImpl(authService = authService, ioDispatcher = coroutineDispatcher)
 
     @Provides
     @Singleton
     fun provideAuthenticationRepository(
         authService: AuthService,
-        appDispatchers: AppDispatchers
+        coroutineDispatcher: CoroutineDispatcher
     ): AuthenticationRepository =
-        AuthenticationRepositoryImpl(authService = authService, appDispatchers = appDispatchers)
+        AuthenticationRepositoryImpl(authService = authService, ioDispatcher = coroutineDispatcher)
 
     @Provides
     @Singleton
@@ -51,11 +50,11 @@ object DataModule {
     @Singleton
     fun provideUserDatabaseLocalRepository(
         appDatabaseDAO: AppDatabaseDAO,
-        appDispatchers: AppDispatchers
+        coroutineDispatcher: CoroutineDispatcher
     ): UsersDatabaseLocalRepository =
         UsersDatabaseLocalRepositoryImpl(
             appDatabaseDAO = appDatabaseDAO,
-            appDispatchers = appDispatchers
+            ioDispatcher = coroutineDispatcher
         )
 
     @Provides

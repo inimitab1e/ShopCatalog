@@ -2,7 +2,6 @@ package com.example.shopcatalog.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.shopcatalog.data.AppDispatchers
 import com.example.shopcatalog.data.local.database.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -23,8 +22,4 @@ object AppModule {
     ).allowMainThreadQueries()
         .fallbackToDestructiveMigration()
         .build()
-
-    @Provides
-    @Singleton
-    fun provideDispatchers(): AppDispatchers = AppDispatchers()
 }

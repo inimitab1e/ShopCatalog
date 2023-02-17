@@ -1,26 +1,24 @@
 package com.example.shopcatalog.data.repository
 
 import android.net.Uri
-import com.example.shopcatalog.data.AppDispatchers
 import com.example.shopcatalog.data.toCurrentUserInfo
 import com.example.shopcatalog.domain.local.AppDatabaseDAO
 import com.example.shopcatalog.domain.local.entities.Users
 import com.example.shopcatalog.domain.model.CurrentUserInfo
 import com.example.shopcatalog.domain.repository.UsersDatabaseLocalRepository
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class UsersDatabaseLocalRepositoryImpl @Inject constructor(
     private val appDatabaseDAO: AppDatabaseDAO,
-    private val appDispatchers: AppDispatchers
+    private val ioDispatcher: CoroutineDispatcher
 ) : UsersDatabaseLocalRepository {
 
     override suspend fun insertInitialUserInfoToDatabase(email: String, userName: String) {
-        withContext(appDispatchers.io) {
+        withContext(ioDispatcher) {
             appDatabaseDAO.importUserInfo(
                 Users(
                     email = email,
@@ -39,19 +37,19 @@ class UsersDatabaseLocalRepositoryImpl @Inject constructor(
 
 
     override suspend fun updateUserGenderInDatabase(value: String, email: String) {
-        withContext(appDispatchers.io) {
+        withContext(ioDispatcher) {
             appDatabaseDAO.updateUserGender(value, email)
         }
     }
 
     override suspend fun updateUserPhoneNumberInDatabase(value: String, email: String) {
-        withContext(appDispatchers.io) {
+        withContext(ioDispatcher) {
             appDatabaseDAO.updateUserPhoneNumber(value, email)
         }
     }
 
     override suspend fun updateUserProfileAvatarInDatabase(value: Uri, email: String) {
-        withContext(appDispatchers.io) {
+        withContext(ioDispatcher) {
             appDatabaseDAO.updateUserProfileImage(value, email)
         }
     }
