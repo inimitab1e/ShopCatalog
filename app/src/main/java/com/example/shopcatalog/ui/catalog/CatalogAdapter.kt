@@ -7,11 +7,20 @@ import com.example.shopcatalog.databinding.CatalogListItemBinding
 
 class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
-    class ViewHolder(binding: CatalogListItemBinding): RecyclerView.ViewHolder(binding.root) {
+    var onItemClick: ((String) -> Unit)? = null
+    var catalogList = mutableListOf<String>()
+
+    inner class ViewHolder(binding: CatalogListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         val tvTest = binding.tvTest
+
+        init {
+            itemView.setOnClickListener {
+                onItemClick?.invoke(catalogList[bindingAdapterPosition])
+            }
+        }
     }
 
-    var catalogList = mutableListOf<String>()
+
 
     fun setCatalogItemsList(category: List<String>) {
         this.catalogList = category.toMutableList()
@@ -19,7 +28,8 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        val binding = CatalogListItemBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+        val binding =
+            CatalogListItemBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
         return ViewHolder(binding)
     }
 

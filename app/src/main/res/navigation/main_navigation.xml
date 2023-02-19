@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_catalogFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_catalogFragment_to_catalogItemFragment"
+            app:destination="@id/catalogItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -82,5 +85,14 @@
         <action
             android:id="@+id/action_launchAppFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/catalogItemFragment"
+        android:name="com.example.shopcatalog.ui.catalog.catalog_item.CatalogItemFragment"
+        android:label="fragment_catalog_item"
+        tools:layout="@layout/fragment_catalog_item" >
+        <action
+            android:id="@+id/action_catalogItemFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
 </navigation>
