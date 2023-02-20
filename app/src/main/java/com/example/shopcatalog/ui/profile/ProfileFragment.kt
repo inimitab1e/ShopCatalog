@@ -72,6 +72,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun updateUserGenderInfo() {
-        binding.tvProfileGender.text = selectedGender
+        profileViewModel.updateUserGender(selectedGender)
     }
 }

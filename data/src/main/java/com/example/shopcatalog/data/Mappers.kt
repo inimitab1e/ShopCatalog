@@ -4,7 +4,9 @@ import android.net.Uri
 import com.example.shopcatalog.data.model.CatalogItemsListDto
 import com.example.shopcatalog.data.model.authenticationDto.AuthResponseDto
 import com.example.shopcatalog.data.model.authenticationDto.ValidityResponseDto
+import com.example.shopcatalog.domain.local.entities.Cart
 import com.example.shopcatalog.domain.local.entities.Users
+import com.example.shopcatalog.domain.model.CatalogItemInCart
 import com.example.shopcatalog.domain.model.CatalogItemsList
 import com.example.shopcatalog.domain.model.CurrentUserInfo
 import com.example.shopcatalog.domain.model.authentication.AuthResponse
@@ -29,4 +31,9 @@ fun Users.toCurrentUserInfo() : CurrentUserInfo = CurrentUserInfo(
 
 fun CatalogItemsListDto.toCatalogItemList() : CatalogItemsList = CatalogItemsList(
     catalogList = catalogList
+)
+
+fun Cart.toCatalogItemInCart() : CatalogItemInCart = CatalogItemInCart(
+    catalogItemName = catalogItemName ?: "",
+    catalogItemCount = catalogItemCount ?: ""
 )

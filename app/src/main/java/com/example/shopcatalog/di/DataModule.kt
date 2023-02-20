@@ -43,8 +43,16 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideCatalogRepository(@ApplicationContext context: Context): CatalogRepository =
-        CatalogRepositoryImpl(context = context)
+    fun provideCatalogRepository(
+        @ApplicationContext context: Context,
+        appDatabaseDAO: AppDatabaseDAO,
+        coroutineDispatcher: CoroutineDispatcher
+    ): CatalogRepository =
+        CatalogRepositoryImpl(
+            context = context,
+            appDatabaseDAO = appDatabaseDAO,
+            ioDispatcher = coroutineDispatcher
+        )
 
     @Provides
     @Singleton

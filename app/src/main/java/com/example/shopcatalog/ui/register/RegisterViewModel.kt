@@ -46,9 +46,7 @@ class RegisterViewModel @Inject constructor(
     }
 
     private fun initUserDatabaseInfo(email: String, userName: String) {
-        viewModelScope.launch {
-            usersDatabaseLocalRepository.insertInitialUserInfoToDatabase(email, userName)
-        }
+        usersDatabaseLocalRepository.insertInitialUserInfoToDatabase(email, userName)
     }
 
     private fun insertTokenValuesInPreference(authResponse: AuthResponse, email: String) {

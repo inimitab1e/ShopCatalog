@@ -24,8 +24,24 @@ class CatalogItemFragment : Fragment(R.layout.fragment_catalog_item) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initObservers()
+        initClickers()
+    }
+
+    private fun initObservers() {
         catalogShareDataViewModel.catalogItemName.onEach { itemName ->
             binding.tvItemName.text = itemName
+            catalogItemViewModel.getCatalogItemCount(itemName)
         }.launchWhenStarted(lifecycleScope)
+
+        catalogItemViewModel.catalogItemCount.onEach { count ->
+            binding.tvCountOfItems.text = count
+        }.launchWhenStarted(lifecycleScope)
+    }
+
+    private fun initClickers() {
+        with(binding) {
+            //TODO
+        }
     }
 }

@@ -17,19 +17,17 @@ class UsersDatabaseLocalRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) : UsersDatabaseLocalRepository {
 
-    override suspend fun insertInitialUserInfoToDatabase(email: String, userName: String) {
-        withContext(ioDispatcher) {
-            appDatabaseDAO.importUserInfo(
-                Users(
-                    email = email,
-                    userName = userName,
-                    gender = null,
-                    phoneNumber = null,
-                    profileImage = null
-                )
+    override fun insertInitialUserInfoToDatabase(email: String, userName: String) =
+        appDatabaseDAO.importUserInfo(
+            Users(
+                email = email,
+                userName = userName,
+                gender = null,
+                phoneNumber = null,
+                profileImage = null
             )
-        }
-    }
+        )
+
 
     override fun fetchAllUserInfo(email: String): Flow<CurrentUserInfo> =
         appDatabaseDAO.fetchAllInfo(email)

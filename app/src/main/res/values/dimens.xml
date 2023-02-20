@@ -17,4 +17,12 @@
     <dimen name="user_general_info_margin_top">50dp</dimen>
     <dimen name="btn_change_gender_margin_top">50dp</dimen>
     <dimen name="btn_logout_margin_top">50dp</dimen>
+    <dimen name="catalog_item_image_margin">15dp</dimen>
+    <dimen name="catalog_item_name_margin_top">10dp</dimen>
+    <dimen name="catalog_item_name_text_size">24sp</dimen>
+    <dimen name="remove_item_image_btn_margin_top">70dp</dimen>
+    <dimen name="add_item_image_btn_margin_top">70dp</dimen>
+    <dimen name="catalog_item_count_width">40dp</dimen>
+    <dimen name="remove_item_count_text_size">32sp</dimen>
+    <dimen name="catalog_item_to_cart_btn_magin_top">30dp</dimen>
 </resources>

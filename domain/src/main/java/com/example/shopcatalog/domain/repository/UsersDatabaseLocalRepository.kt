@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface UsersDatabaseLocalRepository {
 
-    suspend fun insertInitialUserInfoToDatabase(email: String, userName: String)
+    fun insertInitialUserInfoToDatabase(email: String, userName: String)
 
     fun fetchAllUserInfo(email: String) : Flow<CurrentUserInfo>
 
