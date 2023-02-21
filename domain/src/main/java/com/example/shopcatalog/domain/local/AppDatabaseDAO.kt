@@ -28,7 +28,7 @@ interface AppDatabaseDAO {
     suspend fun updateUserProfileImage(value: Uri, email: String)
 
     @Query ("SELECT * from cart where catalogItemName = :catalogItemName")
-    suspend fun getCatalogItemsInCart(catalogItemName: String): Cart?
+    fun getCatalogItemsInCart(catalogItemName: String): Flow<Cart?>
 
     @Insert
     suspend fun addNewToCart(newCatalogItem: Cart)

@@ -5,9 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.shopcatalog.domain.repository.CatalogRepository
 import com.example.shopcatalog.domain.utils.StringConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,17 +15,16 @@ class CatalogItemViewModel @Inject constructor(
     private val catalogRepository: CatalogRepository
 ) : ViewModel() {
 
-    private val _catalogItemCount = MutableStateFlow(StringConstants.defaultCatalogItemCount)
-    val catalogItemCount: StateFlow<String> get() = _catalogItemCount.asStateFlow()
+    private val _catalogItemCount =
+        MutableSharedFlow<String?>(1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    val catalogItemCount: SharedFlow<String?> get() = _catalogItemCount.asSharedFlow()
 
     fun getCatalogItemCount(catalogItemName: String) {
         viewModelScope.launch {
-            val response = catalogRepository.getExistingCatalogItems(catalogItemName)
-            if (response == null) {
-                _catalogItemCount.emit(StringConstants.defaultCatalogItemCount)
-            } else {
-                _catalogItemCount.emit(response.catalogItemCount)
-            }
+            catalogRepository.getExistingCatalogItems(catalogItemName)
+                .collect { catalogItemInCart ->
+                    _catalogItemCount.tryEmit(catalogItemInCart?.catalogItemCount)
+                }
         }
     }
 

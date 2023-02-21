@@ -11,6 +11,8 @@ import com.example.shopcatalog.domain.repository.CatalogRepository
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.lang.reflect.Type
 import javax.inject.Inject
@@ -31,11 +33,9 @@ class CatalogRepositoryImpl @Inject constructor(
         return facAndSpec.toCatalogItemList()
     }
 
-    override suspend fun getExistingCatalogItems(catalogItemName: String): CatalogItemInCart? =
-        withContext(ioDispatcher) {
-            val response =
-                appDatabaseDAO.getCatalogItemsInCart(catalogItemName) ?: return@withContext null
-            return@withContext response.toCatalogItemInCart()
+    override fun getExistingCatalogItems(catalogItemName: String): Flow<CatalogItemInCart?> =
+        appDatabaseDAO.getCatalogItemsInCart(catalogItemName).map { value ->
+            value?.toCatalogItemInCart()
         }
 
     override suspend fun addOneItemToCart(catalogItemName: String, count: String) {

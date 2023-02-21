@@ -16,3 +16,15 @@ fun <T> Flow<T>.launchWhenResumed(lifecycleScope: LifecycleCoroutineScope) {
         this@launchWhenResumed.collect()
     }
 }
+
+fun String.addOne(): String {
+    return (this.toInt() + 1).toString()
+}
+
+fun String.removeOne(): String {
+    return if (this.toInt() - 1 >= 0) {
+        (this.toInt() - 1).toString()
+    } else {
+        this
+    }
+}

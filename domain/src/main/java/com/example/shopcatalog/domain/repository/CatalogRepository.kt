@@ -2,11 +2,12 @@ package com.example.shopcatalog.domain.repository
 
 import com.example.shopcatalog.domain.model.CatalogItemInCart
 import com.example.shopcatalog.domain.model.CatalogItemsList
+import kotlinx.coroutines.flow.Flow
 
 interface CatalogRepository {
     suspend fun getListOfCatalogItems(): CatalogItemsList
 
-    suspend fun getExistingCatalogItems(catalogItemName: String): CatalogItemInCart?
+    fun getExistingCatalogItems(catalogItemName: String): Flow<CatalogItemInCart?>
 
     suspend fun addOneItemToCart(catalogItemName: String, count: String)
 
