@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.shopcatalog.R
 import com.example.shopcatalog.databinding.FragmentCatalogItemBinding
@@ -51,13 +52,8 @@ class CatalogItemFragment : Fragment(R.layout.fragment_catalog_item) {
     }
 
     private fun setCountValue(count: String?) {
-        if (count == null) {
-            countValue = StringConstants.defaultCatalogItemCount
-            binding.tvCountOfItems.text = countValue
-        } else {
-            countValue = count
-            binding.tvCountOfItems.text = countValue
-        }
+        countValue = count ?: StringConstants.defaultCatalogItemCount
+        binding.tvCountOfItems.text = countValue
     }
 
     private fun setupRemoveButtonUiActivity() {
@@ -84,6 +80,10 @@ class CatalogItemFragment : Fragment(R.layout.fragment_catalog_item) {
             ibRemoveItemToCart.setOnClickListener {
                 itemName = binding.tvItemName.text.toString()
                 catalogItemViewModel.removeItem(itemName, countValue.removeOne())
+            }
+
+            btnToCart.setOnClickListener {
+                findNavController().navigate(R.id.action_catalogItemFragment_to_cartFragment)
             }
         }
     }

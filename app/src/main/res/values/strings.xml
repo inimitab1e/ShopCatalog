@@ -23,4 +23,7 @@
     <string name="btn_logout_text">Выйти из аккаунта</string>
     <string name="radio_btn_male">Мужской</string>
     <string name="radio_btn_female">Женский</string>
+    <string name="empty_catalog_title_text">Корзина пуста</string>
+    <string name="empty_catalog_description_text">Перейдите в каталог</string>
+    <string name="btn_to_catalog_text">Каталог</string>
 </resources>

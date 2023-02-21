@@ -25,4 +25,6 @@
     <dimen name="catalog_item_count_width">40dp</dimen>
     <dimen name="remove_item_count_text_size">32sp</dimen>
     <dimen name="catalog_item_to_cart_btn_magin_top">30dp</dimen>
+    <dimen name="empty_catalog_title_text_size">24sp</dimen>
+    <dimen name="btn_to_catalog_margin_yop">20dp</dimen>
 </resources>
