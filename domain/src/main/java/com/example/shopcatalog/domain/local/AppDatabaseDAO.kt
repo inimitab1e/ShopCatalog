@@ -27,11 +27,14 @@ interface AppDatabaseDAO {
     @Query("UPDATE users SET profileImage = :value WHERE email = :email")
     suspend fun updateUserProfileImage(value: Uri, email: String)
 
+    @Query("SELECT * from cart")
+    suspend fun getAllItemsFromCart(): List<Cart>
+
     @Query("SELECT COUNT(catalogItemName) from cart")
     fun getRowsCountOfCart(): Flow<Int>
 
     @Query ("SELECT * from cart where catalogItemName = :catalogItemName")
-    fun getCatalogItemsInCart(catalogItemName: String): Flow<Cart?>
+    fun getPickedCatalogItemInCart(catalogItemName: String): Flow<Cart?>
 
     @Insert
     suspend fun addNewToCart(newCatalogItem: Cart)

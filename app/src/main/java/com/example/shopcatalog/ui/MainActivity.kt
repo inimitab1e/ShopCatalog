@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun setupBottomNavigationCartBadge() {
-        mainActivityViewModel.catalogItemCount.onEach { cartItems ->
+        mainActivityViewModel.cartItemCount.onEach { cartItems ->
             if (cartItems == cartSizeDefaultValue) {
                 binding.bottomNavigationView.removeBadge(R.id.cartFragment)
             } else {

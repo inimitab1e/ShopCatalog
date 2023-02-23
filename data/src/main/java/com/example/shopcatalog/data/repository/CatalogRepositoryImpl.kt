@@ -23,23 +23,30 @@ class CatalogRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher
 ) : CatalogRepository {
 
-    override suspend fun getListOfCatalogItems(): CatalogItemsList {
-        val jsonString = context.assets.open("Catalog.json")
-            .bufferedReader()
-            .use { it.readText() }
-        val gson = Gson()
-        val objectFacAndSpecType: Type = object : TypeToken<CatalogItemsListDto>() {}.type
-        val facAndSpec = gson.fromJson<CatalogItemsListDto>(jsonString, objectFacAndSpecType)
-        return facAndSpec.toCatalogItemList()
-    }
+    override suspend fun getListOfCatalogItems(): CatalogItemsList =
+        withContext(ioDispatcher) {
+            val jsonString = context.assets.open("Catalog.json")
+                .bufferedReader()
+                .use { it.readText() }
+            val gson = Gson()
+            val objectFacAndSpecType: Type = object : TypeToken<CatalogItemsListDto>() {}.type
+            val facAndSpec = gson.fromJson<CatalogItemsListDto>(jsonString, objectFacAndSpecType)
+            return@withContext facAndSpec.toCatalogItemList()
+        }
 
     override fun getCartSize(): Flow<Int> =
         appDatabaseDAO.getRowsCountOfCart()
 
     override fun getExistingCatalogItems(catalogItemName: String): Flow<CatalogItemInCart?> =
-        appDatabaseDAO.getCatalogItemsInCart(catalogItemName).map { value ->
+        appDatabaseDAO.getPickedCatalogItemInCart(catalogItemName).map { value ->
             value?.toCatalogItemInCart()
         }
+
+    override suspend fun getListOfCartItems(): List<CatalogItemInCart> = withContext(ioDispatcher) {
+        return@withContext appDatabaseDAO.getAllItemsFromCart().map { cartItem ->
+            cartItem.toCatalogItemInCart()
+        }
+    }
 
     override suspend fun addOneItemToCart(catalogItemName: String, count: String) {
         withContext(ioDispatcher) {

@@ -20,8 +20,6 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
         }
     }
 
-
-
     fun setCatalogItemsList(category: List<String>) {
         this.catalogList = category.toMutableList()
         notifyDataSetChanged()
