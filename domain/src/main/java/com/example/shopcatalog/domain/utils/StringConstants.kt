@@ -17,6 +17,7 @@ object StringConstants {
 
     const val unknownCatalogItemName = "Неизвестный товар :("
     const val defaultCatalogItemCount = "0"
+    const val minimumCatalogItemCountInCart = "1"
 
     const val bearerHeader = "Bearer "
     const val accessTokenTitle = "AccessToken"

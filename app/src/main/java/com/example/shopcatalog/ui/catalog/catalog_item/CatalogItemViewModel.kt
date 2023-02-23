@@ -36,7 +36,7 @@ class CatalogItemViewModel @Inject constructor(
 
     fun removeItem(itemName: String, count: String) {
         viewModelScope.launch {
-            catalogRepository.deleteOneItemFromCart(itemName, count)
+            catalogRepository.deleteOrDecreaseOneItemFromCart(itemName, count)
         }
     }
 }

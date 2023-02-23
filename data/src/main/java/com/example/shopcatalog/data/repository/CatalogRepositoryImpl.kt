@@ -42,21 +42,26 @@ class CatalogRepositoryImpl @Inject constructor(
             value?.toCatalogItemInCart()
         }
 
-    override suspend fun getListOfCartItems(): List<CatalogItemInCart> = withContext(ioDispatcher) {
-        return@withContext appDatabaseDAO.getAllItemsFromCart().map { cartItem ->
-            cartItem.toCatalogItemInCart()
+    override fun getListOfCartItems(): Flow<List<CatalogItemInCart>> =
+        appDatabaseDAO.getAllItemsFromCart().map { catalogItemsList ->
+            catalogItemsList.map { cartItem -> cartItem.toCatalogItemInCart() }
+        }
+
+    override suspend fun addOneItemToCart(cartItemName: String, count: String) {
+        withContext(ioDispatcher) {
+            appDatabaseDAO.addNewOrAddOneCatalogItem(cartItemName, count)
         }
     }
 
-    override suspend fun addOneItemToCart(catalogItemName: String, count: String) {
+    override suspend fun deleteOrDecreaseOneItemFromCart(cartItemName: String, count: String) {
         withContext(ioDispatcher) {
-            appDatabaseDAO.addNewOrAddOneCatalogItem(catalogItemName, count)
+            appDatabaseDAO.removeOrDeleteCatalogItemFromCart(cartItemName, count)
         }
     }
 
-    override suspend fun deleteOneItemFromCart(catalogItemName: String, count: String) {
+    override suspend fun deleteItemFromCart(cartItemName: String) {
         withContext(ioDispatcher) {
-            appDatabaseDAO.removeOrDeleteCatalogItemFromCart(catalogItemName, count)
+            appDatabaseDAO.deleteCartItem(cartItemName)
         }
     }
 

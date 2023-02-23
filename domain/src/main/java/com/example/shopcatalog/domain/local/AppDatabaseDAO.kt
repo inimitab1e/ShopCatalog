@@ -28,7 +28,7 @@ interface AppDatabaseDAO {
     suspend fun updateUserProfileImage(value: Uri, email: String)
 
     @Query("SELECT * from cart")
-    suspend fun getAllItemsFromCart(): List<Cart>
+    fun getAllItemsFromCart(): Flow<List<Cart>>
 
     @Query("SELECT COUNT(catalogItemName) from cart")
     fun getRowsCountOfCart(): Flow<Int>
@@ -43,7 +43,7 @@ interface AppDatabaseDAO {
     suspend fun deleteAllCartInfo()
 
     @Query("DELETE from cart where catalogItemName = :catalogItemName")
-    suspend fun deleteCatalogItem(catalogItemName: String)
+    suspend fun deleteCartItem(catalogItemName: String)
 
     @Query("UPDATE cart SET catalogItemCount = :count where catalogItemName = :catalogItemName")
     suspend fun addOneToCart(catalogItemName: String, count: String)
@@ -54,7 +54,7 @@ interface AppDatabaseDAO {
     @Transaction
     suspend fun removeOrDeleteCatalogItemFromCart(catalogItemName: String, count: String) {
         if (count == "0") {
-            deleteCatalogItem(catalogItemName)
+            deleteCartItem(catalogItemName)
         } else {
             removeOneFromCart(catalogItemName, count)
         }

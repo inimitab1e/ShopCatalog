@@ -19,9 +19,33 @@ class CartViewModel @Inject constructor(
         MutableSharedFlow<List<CatalogItemInCart>>(1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
     val cartItemsList: SharedFlow<List<CatalogItemInCart>> get() = _cartItemsList.asSharedFlow()
 
-    fun getCartItemsList() {
+    init {
+        getCartItemsList()
+    }
+
+    private fun getCartItemsList() {
         viewModelScope.launch {
-            _cartItemsList.tryEmit(catalogRepository.getListOfCartItems())
+            catalogRepository.getListOfCartItems().collect { catalogItemsList ->
+                _cartItemsList.tryEmit(catalogItemsList)
+            }
+        }
+    }
+
+    fun deleteFromCart(itemName: String) {
+        viewModelScope.launch {
+            catalogRepository.deleteItemFromCart(itemName)
+        }
+    }
+
+    fun addItem(itemName: String, count: String) {
+        viewModelScope.launch {
+            catalogRepository.addOneItemToCart(itemName, count)
+        }
+    }
+
+    fun removeItem(itemName: String, count: String) {
+        viewModelScope.launch {
+            catalogRepository.deleteOrDecreaseOneItemFromCart(itemName, count)
         }
     }
 }

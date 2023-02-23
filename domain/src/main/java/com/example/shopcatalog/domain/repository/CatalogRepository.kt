@@ -11,11 +11,13 @@ interface CatalogRepository {
 
     fun getExistingCatalogItems(catalogItemName: String): Flow<CatalogItemInCart?>
 
-    suspend fun getListOfCartItems(): List<CatalogItemInCart>
+    fun getListOfCartItems(): Flow<List<CatalogItemInCart>>
 
-    suspend fun addOneItemToCart(catalogItemName: String, count: String)
+    suspend fun addOneItemToCart(cartItemName: String, count: String)
 
-    suspend fun deleteOneItemFromCart(catalogItemName: String, count: String)
+    suspend fun deleteOrDecreaseOneItemFromCart(cartItemName: String, count: String)
+
+    suspend fun deleteItemFromCart(cartItemName: String)
 
     suspend fun clearAllCartInfo()
 }

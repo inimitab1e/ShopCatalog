@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.shopcatalog.R
 import com.example.shopcatalog.databinding.FragmentCartBinding
+import com.example.shopcatalog.extensions.addOne
 import com.example.shopcatalog.extensions.launchWhenStarted
+import com.example.shopcatalog.extensions.removeOne
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class CartFragment : Fragment(R.layout.fragment_cart) {
+class CartFragment : Fragment(R.layout.fragment_cart), CartAdapter.ButtonsClickListener {
 
     private val binding by viewBinding(FragmentCartBinding::bind)
     private val cartViewModel: CartViewModel by viewModels()
@@ -31,17 +33,13 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
         initClickers()
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        cartViewModel.getCartItemsList()
-    }
-
     private fun initRecyclerView() {
         binding.rwCartList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = cartAdapter
         }
+
+        cartAdapter.listener = this
 
         cartViewModel.cartItemsList.onEach { cartItemsList ->
             if (cartItemsList.isEmpty()) {
@@ -64,4 +62,17 @@ class CartFragment : Fragment(R.layout.fragment_cart) {
             findNavController().navigate(R.id.action_cartFragment_to_catalogFragment)
         }
     }
+
+    override fun onDeleteFromCartButtonClickListener(itemName: String) {
+        cartViewModel.deleteFromCart(itemName)
+    }
+
+    override fun onRemoveItemButtonClickListener(itemName: String, countItem: String) {
+        cartViewModel.removeItem(itemName, countItem.removeOne())
+    }
+
+    override fun onAddItemButtonClickListener(itemName: String, countItem: String) {
+        cartViewModel.addItem(itemName, countItem.addOne())
+    }
+
 }
