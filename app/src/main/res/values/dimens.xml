@@ -27,4 +27,18 @@
     <dimen name="catalog_item_to_cart_btn_magin_top">30dp</dimen>
     <dimen name="empty_catalog_title_text_size">24sp</dimen>
     <dimen name="btn_to_catalog_margin_yop">20dp</dimen>
+    <dimen name="decoration_line_height">1dp</dimen>
+    <dimen name="decoration_line_margin_top">20dp</dimen>
+    <dimen name="cart_item_remove_item_btn_margin_start">30dp</dimen>
+    <dimen name="cart_item_remove_item_btn_margin_top">10dp</dimen>
+    <dimen name="cart_item_add_item_btn_margin_start">30dp</dimen>
+    <dimen name="cart_item_add_item_btn_margin_top">10dp</dimen>
+    <dimen name="cart_item_count_item_btn_margin_start">30dp</dimen>
+    <dimen name="cart_item_count_item_btn_margin_top">10dp</dimen>
+    <dimen name="btn_to_cart_margin_end">20dp</dimen>
+    <dimen name="btn_to_cart_margin_top">10dp</dimen>
+    <dimen name="cart_item_layout_height">210dp</dimen>
+    <dimen name="cart_item_layout_margin">5dp</dimen>
+    <dimen name="cart_item_layout_corner_radius">5dp</dimen>
+    <dimen name="cart_item_layout_elevation">4dp</dimen>
 </resources>

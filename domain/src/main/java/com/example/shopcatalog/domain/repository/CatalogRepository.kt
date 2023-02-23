@@ -7,6 +7,8 @@ import kotlinx.coroutines.flow.Flow
 interface CatalogRepository {
     suspend fun getListOfCatalogItems(): CatalogItemsList
 
+    fun getCartSize(): Flow<Int>
+
     fun getExistingCatalogItems(catalogItemName: String): Flow<CatalogItemInCart?>
 
     suspend fun addOneItemToCart(catalogItemName: String, count: String)

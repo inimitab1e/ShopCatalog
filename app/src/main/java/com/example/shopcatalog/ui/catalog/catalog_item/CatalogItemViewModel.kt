@@ -16,14 +16,14 @@ class CatalogItemViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _catalogItemCount =
-        MutableSharedFlow<String?>(1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    val catalogItemCount: SharedFlow<String?> get() = _catalogItemCount.asSharedFlow()
+        MutableStateFlow<String?>(StringConstants.defaultCatalogItemCount)
+    val catalogItemCount: StateFlow<String?> get() = _catalogItemCount.asStateFlow()
 
     fun getCatalogItemCount(catalogItemName: String) {
         viewModelScope.launch {
             catalogRepository.getExistingCatalogItems(catalogItemName)
                 .collect { catalogItemInCart ->
-                    _catalogItemCount.tryEmit(catalogItemInCart?.catalogItemCount)
+                    _catalogItemCount.value = catalogItemInCart?.catalogItemCount
                 }
         }
     }

@@ -33,6 +33,9 @@ class CatalogRepositoryImpl @Inject constructor(
         return facAndSpec.toCatalogItemList()
     }
 
+    override fun getCartSize(): Flow<Int> =
+        appDatabaseDAO.getRowsCountOfCart()
+
     override fun getExistingCatalogItems(catalogItemName: String): Flow<CatalogItemInCart?> =
         appDatabaseDAO.getCatalogItemsInCart(catalogItemName).map { value ->
             value?.toCatalogItemInCart()
