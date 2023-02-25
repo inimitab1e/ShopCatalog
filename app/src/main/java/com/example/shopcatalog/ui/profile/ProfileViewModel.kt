@@ -45,12 +45,6 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    fun updateUserPhoneNumber(phoneNumber: String) {
-        viewModelScope.launch {
-            usersDatabaseLocalRepository.updateUserPhoneNumberInDatabase(phoneNumber, getEmail())
-        }
-    }
-
     fun updateUserProfileImage(image: Uri) {
         viewModelScope.launch {
             usersDatabaseLocalRepository.updateUserProfileAvatarInDatabase(image, getEmail())

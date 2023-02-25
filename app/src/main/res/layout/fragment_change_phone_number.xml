@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.profile.ChangePhoneNumberFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/tvChangePhoneTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="Укажите номер тлефона"
+        android:textSize="20sp"
+        android:fontFamily="@font/inter_bold"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/etChangePhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:paddingStart="22dp"
+        android:hint="Новый номер телефона"
+        android:textColor="@color/edittext_text_color"
+        android:textSize="16sp"
+        android:background="@drawable/base_edit_text_modif"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="Здесь могло быть поле ввода проверочного кода"
+        android:textSize="16sp"
+        android:fontFamily="@font/inter"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/btnChangePhoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:text="Изменить"
+        android:background="@drawable/base_edit_text_modif" />
+
+</LinearLayout>

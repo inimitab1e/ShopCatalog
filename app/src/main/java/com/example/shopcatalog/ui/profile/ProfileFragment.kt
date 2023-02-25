@@ -51,6 +51,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 findNavController().navigate(R.id.action_profileFragment_to_registerFragment)
             }
 
+            btnChangeProfilePhoneNumber.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_changePhoneNumberFragment)
+            }
+
             btnChangeProfileGender.setOnClickListener {
                 showDialog()
             }

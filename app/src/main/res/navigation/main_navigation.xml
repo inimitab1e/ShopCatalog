@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_profileFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_changePhoneNumberFragment"
+            app:destination="@id/changePhoneNumberFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -96,5 +99,14 @@
         <action
             android:id="@+id/action_catalogItemFragment_to_cartFragment"
             app:destination="@id/cartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePhoneNumberFragment"
+        android:name="com.example.shopcatalog.ui.profile.ChangePhoneNumberFragment"
+        android:label="fragment_change_phone_number"
+        tools:layout="@layout/fragment_change_phone_number" >
+        <action
+            android:id="@+id/action_changePhoneNumberFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 </navigation>
