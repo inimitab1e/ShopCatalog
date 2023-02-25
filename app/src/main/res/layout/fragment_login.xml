@@ -118,7 +118,7 @@
         android:layout_height="wrap_content"
         android:autoLink="all"
         android:fontFamily="@font/inter"
-        android:text="@string/to_login_link_text"
+        android:text="@string/to_register_link_text"
         android:textAlignment="center"
         android:textColor="@color/link_text_color"
         android:textSize="@dimen/information_text_size"

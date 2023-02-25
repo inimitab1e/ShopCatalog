@@ -3,6 +3,7 @@ package com.example.shopcatalog.ui.profile
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.activity.addCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -24,6 +25,17 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var selectedGenderIndex = 0
     private val gendersToSetInDialog = arrayOf(StringConstants.genderMale, StringConstants.genderFemale)
     private var selectedGender = gendersToSetInDialog[selectedGenderIndex]
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            if (childFragmentManager.backStackEntryCount > 0) {
+                childFragmentManager.popBackStack();
+            }
+            activity?.finish()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

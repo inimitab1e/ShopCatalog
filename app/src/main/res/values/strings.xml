@@ -26,4 +26,5 @@
     <string name="empty_catalog_title_text">Корзина пуста</string>
     <string name="empty_catalog_description_text">Перейдите в каталог</string>
     <string name="btn_to_catalog_text">Каталог</string>
+    <string name="to_register_link_text">Нет аккаунта?</string>
 </resources>
