@@ -7,6 +7,12 @@ object StringConstants {
     const val tokenIsValid = "Access token is valid" //this value returns from back
     const val refreshSuccess = "Refresh success"
 
+    const val emptyEmailErrorMessage = "Поле email обязательно для заполнения"
+    const val invalidEmailErrorMessage = "Неверный email"
+    const val shortPasswordErrorMessage = "Длина пароля должна быть не менее 8 символов"
+    const val invalidPasswordErrorMessage = "Пароль должен содержать хотя бы 1 символ и цифру"
+    const val emptyUsernameErrorMessage = "Поле имени обязательно для заполнения"
+
     const val prefsName = "Secret"
 
     const val genderDialogTitle = "Ваш пол"

@@ -48,7 +48,7 @@ class CatalogFragment : Fragment(R.layout.fragment_catalog) {
         }
 
         catalogViewModel.catalogItemsList.onEach { catalogItemsList ->
-            catalogRwAdapter.setCatalogItemsList(catalogItemsList.catalogList)
+            catalogRwAdapter.setCatalogItemsList(catalogItemsList)
         }.launchWhenStarted(lifecycleScope)
     }
 

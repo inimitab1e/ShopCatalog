@@ -16,8 +16,8 @@ class CartViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _cartItemsList =
-        MutableSharedFlow<List<CatalogItemInCart>>(1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    val cartItemsList: SharedFlow<List<CatalogItemInCart>> get() = _cartItemsList.asSharedFlow()
+        MutableStateFlow<List<CatalogItemInCart>>(emptyList())
+    val cartItemsList: StateFlow<List<CatalogItemInCart>> get() = _cartItemsList.asStateFlow()
 
     init {
         getCartItemsList()

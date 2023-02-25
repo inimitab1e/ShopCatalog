@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.register.RegisterFragment">
+    tools:context=".ui.autentication.register.RegisterFragment">
 
 
     <TextView
@@ -43,6 +43,14 @@
             android:textColorHint="@color/black"
             android:textSize="@dimen/auth_group_edittext_text_size" />
 
+        <TextView
+            android:id="@+id/tvUserNameErrorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:visibility="gone"
+            android:textColor="@color/red" />
+
         <EditText
             android:id="@+id/etEmailRegister"
             android:layout_width="match_parent"
@@ -56,6 +64,14 @@
             android:textColor="@color/edittext_text_color"
             android:textSize="@dimen/auth_group_edittext_text_size" />
 
+        <TextView
+            android:id="@+id/tvEmailErrorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:visibility="gone"
+            android:textColor="@color/red" />
+
         <EditText
             android:id="@+id/etPasswordRegister"
             android:layout_width="match_parent"
@@ -68,6 +84,14 @@
             android:hint="@string/register_password_edittext_hint"
             android:textColor="@color/edittext_text_color"
             android:textSize="@dimen/auth_group_edittext_text_size" />
+
+        <TextView
+            android:id="@+id/tvPasswordErrorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:visibility="gone"
+            android:textColor="@color/red" />
 
         <Button
             android:id="@+id/btnCreateAccount"

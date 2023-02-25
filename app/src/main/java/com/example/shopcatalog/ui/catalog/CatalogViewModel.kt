@@ -6,9 +6,7 @@ import com.example.shopcatalog.domain.model.CatalogItemsList
 import com.example.shopcatalog.domain.repository.CatalogRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,9 +16,9 @@ class CatalogViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _catalogItemsList =
-        MutableSharedFlow<CatalogItemsList>(1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    val catalogItemsList: SharedFlow<CatalogItemsList> =
-        _catalogItemsList.asSharedFlow()
+        MutableStateFlow<List<String>>(emptyList())
+    val catalogItemsList: StateFlow<List<String>> =
+        _catalogItemsList.asStateFlow()
 
     init {
         getCatalogItemsList()
@@ -29,7 +27,7 @@ class CatalogViewModel @Inject constructor(
     private fun getCatalogItemsList() {
         viewModelScope.launch {
             val catalogItemsList = catalogRepository.getListOfCatalogItems()
-            _catalogItemsList.tryEmit(catalogItemsList)
+            _catalogItemsList.tryEmit(catalogItemsList.catalogList)
         }
     }
 }

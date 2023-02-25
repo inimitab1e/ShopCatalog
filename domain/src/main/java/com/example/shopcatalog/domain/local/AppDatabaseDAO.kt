@@ -7,6 +7,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import com.example.shopcatalog.domain.local.entities.Cart
 import com.example.shopcatalog.domain.local.entities.Users
+import com.example.shopcatalog.domain.utils.StringConstants
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -53,7 +54,7 @@ interface AppDatabaseDAO {
 
     @Transaction
     suspend fun removeOrDeleteCatalogItemFromCart(catalogItemName: String, count: String) {
-        if (count == "0") {
+        if (count == StringConstants.defaultCatalogItemCount) {
             deleteCartItem(catalogItemName)
         } else {
             removeOneFromCart(catalogItemName, count)
@@ -62,7 +63,7 @@ interface AppDatabaseDAO {
 
     @Transaction
     suspend fun addNewOrAddOneCatalogItem(catalogItemName: String, count: String) {
-        if (count == "1") {
+        if (count == StringConstants.minimumCatalogItemCountInCart) {
             addNewToCart(Cart(catalogItemName = catalogItemName, catalogItemCount = count))
         } else {
             addOneToCart(catalogItemName, count)

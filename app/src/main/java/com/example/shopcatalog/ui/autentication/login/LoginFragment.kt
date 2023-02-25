@@ -1,9 +1,11 @@
-package com.example.shopcatalog.ui.login
+package com.example.shopcatalog.ui.autentication.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -25,7 +27,28 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
 
         initClickers()
+        initObservers()
+    }
 
+    private fun initClickers() {
+        with(binding) {
+            tvRegisterLink.setOnClickListener {
+                findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            }
+
+            btnLogin.setOnClickListener {
+                doValidationAndLogin()
+            }
+        }
+    }
+
+    private fun doValidationAndLogin() {
+        val email = binding.etEmailLogin.text.toString()
+        val password = binding.etPasswordLogin.text.toString()
+        loginViewModel.validateAndLogin(email, password)
+    }
+
+    private fun initObservers() {
         loginViewModel.errorLoginResponseMessage.onEach { errorMessage ->
             if (errorMessage != null) {
                 Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show()
@@ -37,23 +60,25 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 findNavController().navigate(R.id.action_loginFragment_to_profileFragment)
             }
         }.launchWhenStarted(lifecycleScope)
-    }
 
-    private fun initClickers() {
-        with(binding) {
-            tvRegisterLink.setOnClickListener {
-                findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+        loginViewModel.errorValidationFormsMessage.onEach { validationState ->
+            if (validationState.emailError != null) {
+                with(binding.tvEmailErrorMessage) {
+                    isVisible = true
+                    text = validationState.emailError
+                }
+            } else {
+                binding.tvEmailErrorMessage.isGone = true
             }
 
-            btnLogin.setOnClickListener {
-                doLogin()
+            if (validationState.passwordError != null) {
+                with(binding.tvPasswordErrorMessage) {
+                    isVisible = true
+                    text = validationState.passwordError
+                }
+            } else {
+                binding.tvPasswordErrorMessage.isGone = true
             }
-        }
-    }
-
-    private fun doLogin() {
-        val email = binding.etEmailLogin.text.toString()
-        val password = binding.etPasswordLogin.text.toString()
-        loginViewModel.doLogin(email, password)
+        }.launchWhenStarted(lifecycleScope)
     }
 }
