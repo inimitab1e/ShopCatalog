@@ -3,6 +3,7 @@ package com.example.shopcatalog.ui.cart
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.shopcatalog.R
 import com.example.shopcatalog.databinding.FragmentCartBinding
+import com.example.shopcatalog.domain.utils.StringConstants
 import com.example.shopcatalog.extensions.addOne
 import com.example.shopcatalog.extensions.launchWhenStarted
 import com.example.shopcatalog.extensions.removeOne
@@ -61,6 +63,12 @@ class CartFragment : Fragment(R.layout.fragment_cart), CartAdapter.ButtonsClickL
         binding.btnToCatalog.setOnClickListener {
             findNavController().navigate(R.id.action_cartFragment_to_catalogFragment)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (activity as AppCompatActivity).supportActionBar?.title =
+            StringConstants.cartFragmentBarTitle
     }
 
     override fun onDeleteFromCartButtonClickListener(itemName: String) {

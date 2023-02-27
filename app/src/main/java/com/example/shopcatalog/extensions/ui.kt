@@ -1,5 +1,7 @@
 package com.example.shopcatalog.extensions
 
+import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleCoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect

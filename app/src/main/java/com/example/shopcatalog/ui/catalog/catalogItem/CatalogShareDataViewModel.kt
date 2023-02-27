@@ -1,4 +1,4 @@
-package com.example.shopcatalog.ui.catalog.catalog_item
+package com.example.shopcatalog.ui.catalog.catalogItem
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -2,6 +2,10 @@ package com.example.shopcatalog.domain.utils
 
 object StringConstants {
 
+    const val profileFragmentBarTitle = "Профиль"
+    const val catalogFragmentBarTitle = "Каталог"
+    const val cartFragmentBarTitle = "Корзина"
+
     const val userNotExists = "User does not exists"
 
     const val tokenIsValid = "Access token is valid" //this value returns from back

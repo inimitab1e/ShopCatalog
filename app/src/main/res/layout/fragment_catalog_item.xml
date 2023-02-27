@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.catalog.catalog_item.CatalogItemFragment">
+    tools:context=".ui.catalog.catalogItem.CatalogItemFragment">
 
     <ImageView
         android:id="@+id/ivItemImage"

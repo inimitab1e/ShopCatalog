@@ -1,11 +1,10 @@
-package com.example.shopcatalog.ui.catalog.catalog_item
+package com.example.shopcatalog.ui.catalog.catalogItem
 
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -19,7 +18,6 @@ import com.example.shopcatalog.extensions.addOne
 import com.example.shopcatalog.extensions.launchWhenStarted
 import com.example.shopcatalog.extensions.removeOne
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.forEach
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
@@ -42,6 +40,7 @@ class CatalogItemFragment : Fragment(R.layout.fragment_catalog_item) {
     private fun initObservers() {
         catalogShareDataViewModel.catalogItemName.onEach { itemName ->
             binding.tvItemName.text = itemName
+            setActionBarTitle(itemName)
             catalogItemViewModel.getCatalogItemCount(itemName)
         }.launchWhenStarted(lifecycleScope)
 
@@ -49,6 +48,10 @@ class CatalogItemFragment : Fragment(R.layout.fragment_catalog_item) {
             setCountValue(count)
             setupRemoveButtonUiActivity()
         }.launchWhenStarted(lifecycleScope)
+    }
+
+    private fun setActionBarTitle(itemName: String) {
+        (activity as AppCompatActivity).supportActionBar?.title = itemName
     }
 
     private fun setCountValue(count: String?) {

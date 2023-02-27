@@ -93,7 +93,7 @@
     </fragment>
     <fragment
         android:id="@+id/catalogItemFragment"
-        android:name="com.example.shopcatalog.ui.catalog.catalog_item.CatalogItemFragment"
+        android:name="com.example.shopcatalog.ui.catalog.catalogItem.CatalogItemFragment"
         android:label="fragment_catalog_item"
         tools:layout="@layout/fragment_catalog_item" >
         <action
